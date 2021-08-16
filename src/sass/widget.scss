@@ -1,0 +1,128 @@
+.syntafinDiscordWidget {
+    max-height: 500px;
+    overflow: auto;
+    padding-right: 5px;
+    position: relative;
+  
+    > div:not(:first-child) {
+      margin-top: 10px;
+    }
+  
+    .discordWidgetUsers > .sidebarItemList,
+    .discordWidgetChannels > .sidebarItemList {
+      margin-left: 5px;
+    }
+  
+    .listTitle {
+      margin-bottom: 10px;
+    }
+  
+    .syntafinDiscordWidgetChannels li:not(.discordChannel) {
+      margin-left: 0px;
+    }
+  
+    .widget-member {
+      -ms-flex-align: center;
+      -webkit-box-align: center;
+      align-items: center;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      margin: 6px 0;
+  
+      .widget-member-name {
+        -ms-flex: 1;
+        -webkit-box-flex: 1;
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+  
+      &:not([data-discord-user-status="online"]) .widget-member-name {
+        opacity: .7;
+      }
+  
+      .widget-member-game {
+        -ms-flex: 1;
+        -webkit-box-flex: 1;
+        flex: 1;
+        overflow: hidden;
+        text-align: right;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+  
+      .widget-member-avatar {
+        height: 16px;
+        margin-right: 4px;
+        position: relative;
+        width: 16px;
+  
+        img {
+          border-radius: 8px;
+          height: 16px;
+          width: 16px;
+          vertical-align: initial;
+        }
+      }
+  
+      .widget-member-status {
+        &:not(.noAvatar) {
+          border-radius: 3px;
+          bottom: 0;
+          height: 6px;
+          position: absolute;
+          right: 0;
+          width: 6px;
+          vertical-align: initial;
+        }
+  
+        &.noAvatar {
+          border-radius: 8px;
+          height: 16px;
+          width: 16px;
+          margin-right: 4px;
+          position: relative;
+          display: block;
+        }
+  
+        &.widget-member-status-online {
+          background-color: #43b581;
+        }
+  
+        &.widget-member-status-idle {
+          background-color: #faa61a;
+        }
+  
+        &.widget-member-status-offline {
+          background-color: #747f8d;
+        }
+  
+        &.widget-member-status-dnd {
+          background-color: #f04747;
+        }
+      }
+    }
+  
+    .widget-icon {
+      flex: none;
+      background-color: transparent;
+      background-size: 16px 16px;
+      display: inline-block;
+      height: 16px;
+      width: 16px;
+  
+      &+.widget-icon {
+        margin-left: 8px
+      }
+  
+      &.widget-icon-mute:before {
+        content: "\f131";
+      }
+  
+      &.widget-icon-deaf:before {
+        content: "\f2a4";
+      }
+    }
+  }

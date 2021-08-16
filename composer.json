@@ -1,0 +1,29 @@
+{
+    "name": "syntafin/discordwidget",
+    "description": "A Discord Widget for Laravel/Livewire",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Syntafin\\DiscordWidget\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Syntafin",
+            "email": "hello@syntafin.dev"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.4",
+        "laravel/framework": "^8.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Syntafin\\DiscordWidget\\DiscordWidgetServiceProvider"
+            ]
+        }
+    }
+}
