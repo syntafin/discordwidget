@@ -18,6 +18,7 @@
 # About the project
 
 This is a simple package to provide a Discord Widget through a Livewire component.
+Thanks to [SoftCreatR](https://github.com/softcreatr) for the inspiration!
 
 # Installation
 
