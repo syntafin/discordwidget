@@ -9,4 +9,10 @@ return [
      *
      */
     'include_css' => 'true',
+
+    /**
+     * Set to true, to use FontAwesome 6 icons.
+     *
+     */
+    'fontawesome' => env('DISCORD_FONTAWESOME', false),
 ];
