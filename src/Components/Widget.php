@@ -4,6 +4,7 @@ namespace Syntafin\DiscordWidget\Components;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 
 class Widget extends Component
 {
