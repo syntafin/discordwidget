@@ -2,6 +2,7 @@
 
 namespace Syntafin\DiscordWidget;
 
+use Illuminate\Support\Facades\View;
 use Syntafin\DiscordWidget\Components\Widget;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
