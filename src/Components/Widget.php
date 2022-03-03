@@ -23,7 +23,12 @@ class Widget extends Component
 
     private function getServer($serverId)
     {
-        $result = Http::get('https://discordapp.com/api/guilds/'.$serverId.'/widget.json');
+        if(Cache::has('discord-widget-server-'.$serverId)) {
+            $result = Cache::get('discord-widget-server-'.$serverId);
+        }else{
+            $result = Http::get('https://discord.com/api/guilds/'.$serverId.'/widget.json');
+            Cache::put('discord-widget-server-'.$serverId, $result, now()->addMinutes(5));
+        }
         $response = json_decode($result->getBody());
 
         if(isset($response->message)) {

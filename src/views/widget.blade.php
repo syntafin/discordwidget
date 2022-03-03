@@ -2,11 +2,17 @@
     @isset($data->error)
     <div class="alert alert-danger">
         @lang('discord-widget::widget.error', ['error' => $data->error, 'code' => $data->code])
+        @dump($data)
     </div>
     @else
-    <div class="syntafinDiscordWidget">
-        <h5 class="align-center">@lang('discord-widget::widget.voicechannel') <span class="badge badge-secondary">{{ $data->channel_count }}</span></h5>
-        <ul class="list-unstyled">
+    <div class="w-full">
+        <p class="p-6">
+            @lang('discord-widget::widget.voicechannel')
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-100">
+                {{ $data->channel_count }}
+            </span>
+        </p>
+        <ul class="dividy-y divide-gray-200">
             @foreach($data->channel_list as $channel)
                 @if(!empty($data->channelMembers[$channel->id]))
                     <li><i class="fas fa-volume"></i> {{ $channel->name }}
@@ -27,14 +33,14 @@
         </ul>
         <h5>@lang('discord-widget::widget.membersOnline') <span class="badge badge-secondary">{{ $data->member_count }}</span></h5>
         <div class="discordWidgetUsers">
-            <ul class="list-unstyled">
+            <ul class="divide-y divide-gray-200">
                 @foreach($data->member_list as $member)
-                    <li class="widget-member">
-                        <div class="widget-member-avatar align-top">
+                    <li class="py-4 flex">
+                        <div>
                             @if(config('discord-widget.avatar'))
-                                <img src="{{ $member->avatar_url }}" width="25" class="img-fluid rounded rounded-circle" />
+                                <img src="{{ $member->avatar_url }}" class="h-10 w-10 rounded-full" />
                             @endif
-                            <span class="widget-member-status noAvatar" class="widget-member-status-{{ $member->status }}"></span>
+                            <span class="text-sm font-medium text-gray-900 -{{ $member->status }}"></span>
                         </div>
                         <div class="widget-member-name align-baseline">
                             {{ $member->username }}
