@@ -8,7 +8,7 @@
     <div class="w-full">
         <p class="p-6">
             @lang('discord-widget::widget.voicechannel')
-            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-100">
+            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
                 {{ $data->channel_count }}
             </span>
         </p>
@@ -43,7 +43,12 @@
                 @endif
             @endforeach
         </ul>
-        <h5>@lang('discord-widget::widget.membersOnline') <span class="badge badge-secondary">{{ $data->member_count }}</span></h5>
+        <p class="p-6">
+            @lang('discord-widget::widget.membersOnline')
+            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                {{ $data->member_count }}
+            </span>
+        </p>
         <div class="discordWidgetUsers">
             <ul class="divide-y divide-gray-200">
                 @foreach($data->member_list as $member)
