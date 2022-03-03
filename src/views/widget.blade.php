@@ -1,4 +1,20 @@
-@props(['status'])
+@props(['status' => 'online'])
+
+@php
+switch ($status) {
+    case 'online':
+        $status = 'green';
+        break;
+    case 'away':
+        $status = 'yellow';
+        break;
+    case 'dnd':
+        $status = 'red';
+        break;
+    default:
+        $status = 'gray';
+}
+@endphp
 <div>
     @isset($data->error)
     <div class="alert alert-danger">
@@ -44,7 +60,7 @@
                         @if(config('discord-widget.avatar'))
                             <span class="inline-block relative">
                                 <img class="h-10 w-10 rounded-full" src="{{ $member->avatar_url }}" alt="">
-                                <span class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white bg-green-400"></span>
+                                <span class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white bg-{{ $status }}-400"></span>
                             </span>
                         <img src="{{ $member->avatar_url }}" class="h-10 w-10 rounded-full" />
                         @endif
