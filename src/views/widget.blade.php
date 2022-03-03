@@ -1,20 +1,3 @@
-@props(['status' => 'online'])
-
-@php
-switch ($status) {
-    case 'online':
-        $status = 'green';
-        break;
-    case 'away':
-        $status = 'yellow';
-        break;
-    case 'dnd':
-        $status = 'red';
-        break;
-    default:
-        $status = 'gray';
-}
-@endphp
 <div>
     @isset($data->error)
     <div class="alert alert-danger">
@@ -56,15 +39,28 @@ switch ($status) {
         <div class="discordWidgetUsers">
             <ul class="divide-y divide-gray-200">
                 @foreach($data->member_list as $member)
+                    @php
+                        switch ($member->status) {
+                            case 'online':
+                            $status = 'green';
+                            break;
+                            case 'away':
+                            $status = 'yellow';
+                            break;
+                            case 'dnd':
+                            $status = 'red';
+                            break;
+                            default:
+                            $status = 'gray';
+                        }
+                    @endphp
                     <li class="py-4 flex">
                         @if(config('discord-widget.avatar'))
-                            <span class="inline-block relative">
-                                <img class="h-10 w-10 rounded-full" src="{{ $member->avatar_url }}" alt="">
-                                <span class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white bg-{{ $status }}-400"></span>
-                            </span>
-                        <img src="{{ $member->avatar_url }}" class="h-10 w-10 rounded-full" />
+                        <span class="inline-block relative">
+                            <img class="h-10 w-10 rounded-full" src="{{ $member->avatar_url }}" alt="">
+                            <span class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white bg-{{ $status }}-400"></span>
+                        </span>
                         @endif
-                        <span class="text-sm font-medium text-gray-900 -{{ $member->status }}"></span>
                         <div class="ml-3">
                             <p class="text-sm font-medium text-gray-900">{{ $member->username }}</p>
                             @isset($member->game)
