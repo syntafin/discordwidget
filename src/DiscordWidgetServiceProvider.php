@@ -20,7 +20,7 @@ class DiscordWidgetServiceProvider extends ServiceProvider {
 
         $this->publishes([
             __DIR__.'/config.php' => config_path('discord-widget.php'),
-        ])
+        ]);
 
         $this->loadViewsFrom(__DIR__.'/views', 'discord-widget');
         $this->loadTranslationsFrom(__DIR__.'/lang', 'discord-widget');
