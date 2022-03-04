@@ -5,6 +5,7 @@ namespace Syntafin\DiscordWidget;
 use Illuminate\Support\Facades\View;
 use Syntafin\DiscordWidget\Components\Widget;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
 use Livewire\Livewire;
 
 class DiscordWidgetServiceProvider extends ServiceProvider {
@@ -17,8 +18,21 @@ class DiscordWidgetServiceProvider extends ServiceProvider {
             }
         });
 
+        $this->publishes([
+            __DIR__.'/config.php' => config_path('discord-widget.php'),
+        ])
+
         $this->loadViewsFrom(__DIR__.'/views', 'discord-widget');
         $this->loadTranslationsFrom(__DIR__.'/lang', 'discord-widget');
         $this->mergeConfigFrom(__DIR__.'/config.php', 'discord-widget');
+    }
+
+    public function registerDirectives()
+    {
+        $directives = require __DIR__.'/directives.php';
+
+        collect($directives)->each(function ($item, key) {
+            Blade::directive(key, $item);
+        });
     }
 }
