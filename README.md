@@ -26,7 +26,22 @@ Thanks to [SoftCreatR](https://github.com/softcreatr) for the inspiration!
 
 # Usage
 
+Add ``@discordWidget`` to the ``<head>`` of your page.
+
+To show the widget:
+
 ``@livewire('discord-widget', ['serverId' => '1234'])``
+
+or
+
+``<livewire:discord-widget :serverId="1234" />``
+
+# Configuration
+
+The Widget comes with pre-compiled assets, but if you want to use your own Stylesheet,
+you can disable the import in the config ``discordwidget.php``.
+Don't forget to add ``./vendor/syntafin/discordwidget/**/*.php`` to the ``content`` array in your
+TailwindCSS config.
 
 # Contributing
 
