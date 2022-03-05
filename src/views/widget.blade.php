@@ -60,23 +60,23 @@
                     @php
                         switch ($member->status) {
                             case 'online':
-                            $status = 'green';
+                            $status = 'bg-green-400';
                             break;
                             case 'away':
-                            $status = 'yellow';
+                            $status = 'bg-yellow-400';
                             break;
                             case 'dnd':
-                            $status = 'red';
+                            $status = 'bg-red-400';
                             break;
                             default:
-                            $status = 'gray';
+                            $status = 'bg-gray-400';
                         }
                     @endphp
                     <li class="py-4 flex">
                         @if(config('discord-widget.avatar'))
                         <span class="inline-block relative">
                             <img class="h-10 w-10 rounded-full" src="{{ $member->avatar_url }}" alt="">
-                            <span class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white bg-{{ $status }}-400"></span>
+                            <span class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white {{ $status }}"></span>
                         </span>
                         @endif
                         <div class="ml-3">
