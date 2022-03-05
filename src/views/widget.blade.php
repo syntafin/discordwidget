@@ -54,7 +54,7 @@
                 {{ $data->member_count }}
             </span>
         </p>
-        <div class="discordWidgetUsers">
+        <div class="h-64 overflow-y-auto">
             <ul class="divide-y divide-gray-200">
                 @foreach($data->member_list as $member)
                     @php
