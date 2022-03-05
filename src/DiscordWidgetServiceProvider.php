@@ -31,8 +31,8 @@ class DiscordWidgetServiceProvider extends ServiceProvider {
     {
         $directives = require __DIR__.'/directives.php';
 
-        collect($directives)->each(function ($item, key) {
-            Blade::directive(key, $item);
+        collect($directives)->each(function ($item, $key) {
+            Blade::directive($key, $item);
         });
     }
 }
