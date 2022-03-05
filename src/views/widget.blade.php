@@ -62,7 +62,7 @@
                             case 'online':
                             $status = 'bg-green-400';
                             break;
-                            case 'away':
+                            case 'idle':
                             $status = 'bg-yellow-400';
                             break;
                             case 'dnd':
