@@ -50,7 +50,7 @@
         </ul>
         <p class="p-4 text-xl inline-flex">
             @lang('discord-widget::widget.membersOnline')
-            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800 ml-2">
+            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-100 ml-2">
                 {{ $data->member_count }}
             </span>
         </p>
