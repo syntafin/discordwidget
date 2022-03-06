@@ -8,7 +8,7 @@
     <div class="w-full">
         <p class="p-4 text-xl inline-flex">
             @lang('discord-widget::widget.voicechannel')
-            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-100 ml-2">
                 {{ $data->channel_count }}
             </span>
         </p>
@@ -50,11 +50,11 @@
         </ul>
         <p class="p-4 text-xl inline-flex">
             @lang('discord-widget::widget.membersOnline')
-            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800 ml-2">
                 {{ $data->member_count }}
             </span>
         </p>
-        <div class="h-64 overflow-y-auto" data-simplebar>
+        <div class="h-80 overflow-y-auto truncate" data-simplebar>
             <ul class="divide-y divide-gray-200">
                 @foreach($data->member_list as $member)
                     @php
@@ -80,9 +80,9 @@
                         </span>
                         @endif
                         <div class="ml-3">
-                            <p class="text-sm font-medium text-gray-900">{{ $member->username }}</p>
+                            <p class="text-sm font-medium text-gray-900 dark:text-gray-100">{{ $member->username }}</p>
                             @isset($member->game)
-                            <p class="text-sm text-gray-500">{{ $member->game->name }}</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-300">{{ $member->game->name }}</p>
                             @endisset
                         </div>
                     </li>
@@ -90,8 +90,7 @@
             </ul>
         </div>
     </div>
-    <div class="w-full border-t border-gray-300 my-3"></div>
-    <a href="{{ $data->instant_invite }}" class="inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+    <a href="{{ $data->instant_invite }}" class="inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mx-auto">
         @lang('discord-widget::widget.invite')
     </a>
     @endisset
