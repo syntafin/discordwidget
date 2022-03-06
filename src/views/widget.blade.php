@@ -54,7 +54,7 @@
                 {{ $data->member_count }}
             </span>
         </p>
-        <div class="h-80 overflow-y-auto truncate" data-simplebar>
+        <div class="h-80 overflow-y-auto" data-simplebar>
             <ul class="divide-y divide-gray-200">
                 @foreach($data->member_list as $member)
                     @php
