@@ -45,6 +45,13 @@ class Widget extends Component
             if(!empty($member->channel_id)) {
                 $channelMembers[$member->channel_id][] = $member;
             }
+            if(Cache::has('discord-widget-user-'.$member->user->id)) {
+                $response->members[$i]->avatar_url = Cache::get('discord-widget-user-'.$member->user->id);
+            }else{
+                $avatar = Http::get($member->user->avatar_url);
+                Cache::put('discord-widget-user-'.$member->user->id, $avatar->getUri(), now()->addMinutes(5));
+                $response->members[$i]->avatar_url = Cache::get('discord-widget-user-'.$member->user->id);
+            }
         }
 
         if(!empty($response->channels)) {
@@ -57,27 +64,15 @@ class Widget extends Component
             });
         }
 
-        if(isset($channelMembers))
-        {
-            $widgetdata = (object) [
-                'channel_list' => $response->channels,
-                'member_list' => $response->members,
-                'channel_count' => count($response->channels),
-                'member_count' => count($response->members),
-                'server_name' => $response->name,
-                'instant_invite' => $response->instant_invite,
-                'channelMembers' => $channelMembers
-            ];
-        }else{
-            $widgetdata = (object) [
-                'channel_list' => $response->channels,
-                'member_list' => $response->members,
-                'channel_count' => count($response->channels),
-                'member_count' => count($response->members),
-                'server_name' => $response->name,
-                'instant_invite' => $response->instant_invite
-            ];
-        }
+        $widgetdata = (object) [
+            'channel_list' => $response->channels,
+            'member_list' => $response->members,
+            'channel_count' => count($response->channels),
+            'member_count' => count($response->members),
+            'server_name' => $response->name,
+            'instant_invite' => $response->instant_invite,
+            'channelMembers' => isset($channelMembers) ? $channelMembers : null
+        ];
 
         return $widgetdata;
     }
