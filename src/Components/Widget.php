@@ -45,7 +45,7 @@ class Widget extends Component
             if(!empty($member->channel_id)) {
                 $channelMembers[$member->channel_id][] = $member;
             }
-            if(Cache::has('discord-widget-user-'.$member->user->id)) {
+            if(Cache::has('discord-widget-user-'.$member->id)) {
                 $response->members[$i]->avatar_url = Cache::get('discord-widget-user-'.$member->id);
             }else{
                 $avatar = Http::get($member->user->avatar_url);
