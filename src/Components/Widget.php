@@ -55,9 +55,9 @@ class Widget extends Component
 
             if(!Cache::has('discord-widget-user-' . $member->id)) {
                 $avatar = Http::get($member->avatar_url);
-                Cache::put('discord-widget-user-' . $member->id, $avatar->body(), now()->addMinutes(5));
+                Cache::put('discord-widget-user-' . $member->id, base64_encode($avatar->body()), now()->addMinutes(5));
             }
-            $response->members[$i]->avatar_url = Cache::get('discord-widget-user-'.$member->id);
+            $response->members[$i]->avatar_url = 'data:image/png;base64,'.Cache::get('discord-widget-user-'.$member->id);
         }
 
         if(!empty($response->channels)) {
