@@ -8,13 +8,15 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Livewire\Livewire;
 
-class DiscordWidgetServiceProvider extends ServiceProvider {
-    public function boot() {
+class DiscordWidgetServiceProvider extends ServiceProvider
+{
+    public function boot()
+    {
         Livewire::component('discord-widget', Widget::class);
 
         View::composer('discord-widget', function ($view) {
-            if(config('discord-widget.include_css')) {
-                $view->cssPath = __DIR__ . '/../resources/css/discord-discord-widget.css';
+            if (config('discord-widget.include_css')) {
+                $view->cssPath = __DIR__.'/../resources/css/discord-discord-widget.css';
             }
         });
 

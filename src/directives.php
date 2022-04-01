@@ -12,8 +12,8 @@ return [
      |
      */
 
-    'discordWidget' => function() {
-        if(config('discord-widget.include_css')) {
+    'discordWidget' => function () {
+        if (config('discord-widget.include_css')) {
             return '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/discord-widget@1/dist/css/widget.css">';
         }
 

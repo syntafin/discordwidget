@@ -28,41 +28,43 @@ class Widget extends Component
     /**
      * Get server data from cache or Discord API
      *
-     * @param int $serverId
+     * @param  int  $serverId
      * @return object
      */
     private function getServer($serverId): object
     {
-        if(Cache::has('discord-widget-server-'.$serverId)) {
+        if (Cache::has('discord-widget-server-'.$serverId)) {
             $response = Cache::get('discord-widget-server-'.$serverId);
-        }else{
+        } else {
             $result = Http::get('https://discord.com/api/guilds/'.$serverId.'/widget.json');
             $response = json_decode($result->getBody());
             Cache::put('discord-widget-server-'.$serverId, $response, now()->addMinutes(5));
         }
 
-        if(isset($response->message)) {
-            return (object) [
+        if (isset($response->message)) {
+            return (object)[
                 'error' => $response->message,
                 'code' => $response->code
             ];
         }
 
-        foreach($response->members as $i => $member) {
-            if(!empty($member->channel_id)) {
+        foreach ($response->members as $i => $member) {
+            if (!empty($member->channel_id)) {
                 $channelMembers[$member->channel_id][] = $member;
             }
 
-            if(!Cache::has('discord-widget-user-' . $member->id)) {
+            if (!Cache::has('discord-widget-user-'.$member->id)) {
                 $avatar = Http::get($member->avatar_url);
-                Cache::put('discord-widget-user-' . $member->id, base64_encode($avatar->body()), now()->addMinutes(5));
+                Cache::put('discord-widget-user-'.$member->id, base64_encode($avatar->body()), now()->addMinutes(5));
             }
-            $response->members[$i]->avatar_url = 'data:image/png;base64,'.Cache::get('discord-widget-user-'.$member->id);
+            $response->members[$i]->avatar_url = 'data:image/png;base64,'.Cache::get(
+                    'discord-widget-user-'.$member->id
+                );
         }
 
-        if(!empty($response->channels)) {
-            usort($response->channels, static function($a, $b) {
-                if($a->position === $b->position) {
+        if (!empty($response->channels)) {
+            usort($response->channels, static function ($a, $b) {
+                if ($a->position === $b->position) {
                     return 0;
                 }
 
@@ -70,7 +72,7 @@ class Widget extends Component
             });
         }
 
-        return (object) [
+        return (object)[
             'channel_list' => $response->channels,
             'member_list' => $response->members,
             'channel_count' => count($response->channels),
