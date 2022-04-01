@@ -8,13 +8,16 @@ use Illuminate\Support\Facades\Cache;
 
 class Widget extends Component
 {
-    public $serverId;
+    public int $serverId;
 
     public function mount($serverId)
     {
         $this->serverId = $serverId;
     }
 
+    /**
+     * Render the Widget View
+     */
     public function render()
     {
         return view('discord-widget::widget', [
@@ -22,7 +25,13 @@ class Widget extends Component
         ]);
     }
 
-    private function getServer($serverId)
+    /**
+     * Get server data from cache or Discord API
+     *
+     * @param int $serverId
+     * @return object
+     */
+    private function getServer($serverId): object
     {
         if(Cache::has('discord-widget-server-'.$serverId)) {
             $response = Cache::get('discord-widget-server-'.$serverId);
@@ -33,25 +42,22 @@ class Widget extends Component
         }
 
         if(isset($response->message)) {
-            $widgetdata = (object) [
+            return (object) [
                 'error' => $response->message,
                 'code' => $response->code
             ];
-
-            return $widgetdata;
         }
 
         foreach($response->members as $i => $member) {
             if(!empty($member->channel_id)) {
                 $channelMembers[$member->channel_id][] = $member;
             }
-            if(Cache::has('discord-widget-user-'.$member->id)) {
-                $response->members[$i]->avatar_url = Cache::get('discord-widget-user-'.$member->id);
-            }else{
+
+            if(!Cache::has('discord-widget-user-' . $member->id)) {
                 $avatar = Http::get($member->avatar_url);
-                Cache::put('discord-widget-user-'.$member->id, $avatar->getUri(), now()->addMinutes(5));
-                $response->members[$i]->avatar_url = Cache::get('discord-widget-user-'.$member->id);
+                Cache::put('discord-widget-user-' . $member->id, $avatar->body(), now()->addMinutes(5));
             }
+            $response->members[$i]->avatar_url = Cache::get('discord-widget-user-'.$member->id);
         }
 
         if(!empty($response->channels)) {
@@ -64,16 +70,14 @@ class Widget extends Component
             });
         }
 
-        $widgetdata = (object) [
+        return (object) [
             'channel_list' => $response->channels,
             'member_list' => $response->members,
             'channel_count' => count($response->channels),
             'member_count' => count($response->members),
             'server_name' => $response->name,
             'instant_invite' => $response->instant_invite,
-            'channelMembers' => isset($channelMembers) ? $channelMembers : null
+            'channelMembers' => $channelMembers ?? null
         ];
-
-        return $widgetdata;
     }
 }
