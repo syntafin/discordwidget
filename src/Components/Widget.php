@@ -23,10 +23,10 @@ class Widget extends Component
 
     private function getServer($serverId)
     {
-        $result = Http::get('https://discordapp.com/api/guilds/'.$serverId.'/widget.json');
+        $result = Http::get('https://discordapp.com/api/guilds/' . $serverId . '/widget.json');
         $response = json_decode($result->getBody());
 
-        if(isset($response->message)) {
+        if (isset($response->message)) {
             $widgetdata = (object) [
                 'error' => $response->message,
                 'code' => $response->code
@@ -35,15 +35,15 @@ class Widget extends Component
             return $widgetdata;
         }
 
-        foreach($response->members as $i => $member) {
-            if(!empty($member->channel_id)) {
+        foreach ($response->members as $i => $member) {
+            if (!empty($member->channel_id)) {
                 $channelMembers[$member->channel_id][] = $member;
             }
         }
 
-        if(!empty($response->channels)) {
-            usort($response->channels, static function($a, $b) {
-                if($a->position === $b->position) {
+        if (!empty($response->channels)) {
+            usort($response->channels, static function ($a, $b) {
+                if ($a->position === $b->position) {
                     return 0;
                 }
 
@@ -51,8 +51,7 @@ class Widget extends Component
             });
         }
 
-        if(isset($channelMembers))
-        {
+        if (isset($channelMembers)) {
             $widgetdata = (object) [
                 'channel_list' => $response->channels,
                 'member_list' => $response->members,
@@ -62,7 +61,7 @@ class Widget extends Component
                 'instant_invite' => $response->instant_invite,
                 'channelMembers' => $channelMembers
             ];
-        }else{
+        } else {
             $widgetdata = (object) [
                 'channel_list' => $response->channels,
                 'member_list' => $response->members,
