@@ -16,22 +16,22 @@ class DiscordWidgetServiceProvider extends ServiceProvider
 
         View::composer('discord-widget', function ($view) {
             if (config('discord-widget.include_css')) {
-                $view->cssPath = __DIR__.'/../resources/css/discord-discord-widget.css';
+                $view->cssPath = __DIR__ . '/../resources/css/discord-discord-widget.css';
             }
         });
 
         $this->publishes([
-            __DIR__.'/config.php' => config_path('discord-widget.php'),
+            __DIR__ . '/config.php' => config_path('discord-widget.php'),
         ]);
 
-        $this->loadViewsFrom(__DIR__.'/views', 'discord-widget');
-        $this->loadTranslationsFrom(__DIR__.'/lang', 'discord-widget');
-        $this->mergeConfigFrom(__DIR__.'/config.php', 'discord-widget');
+        $this->loadViewsFrom(__DIR__ . '/views', 'discord-widget');
+        $this->loadTranslationsFrom(__DIR__ . '/lang', 'discord-widget');
+        $this->mergeConfigFrom(__DIR__ . '/config.php', 'discord-widget');
     }
 
     public function registerDirectives()
     {
-        $directives = require __DIR__.'/directives.php';
+        $directives = require __DIR__ . '/directives.php';
 
         collect($directives)->each(function ($item, $key) {
             Blade::directive($key, $item);

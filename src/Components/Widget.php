@@ -33,12 +33,12 @@ class Widget extends Component
      */
     private function getServer($serverId): object
     {
-        if (Cache::has('discord-widget-server-'.$serverId)) {
-            $response = Cache::get('discord-widget-server-'.$serverId);
+        if (Cache::has('discord-widget-server-' . $serverId)) {
+            $response = Cache::get('discord-widget-server-' . $serverId);
         } else {
-            $result = Http::get('https://discord.com/api/guilds/'.$serverId.'/widget.json');
+            $result = Http::get('https://discord.com/api/guilds/' . $serverId . '/widget.json');
             $response = json_decode($result->getBody());
-            Cache::put('discord-widget-server-'.$serverId, $response, now()->addMinutes(5));
+            Cache::put('discord-widget-server-' . $serverId, $response, now()->addMinutes(5));
         }
 
         if (isset($response->message)) {
@@ -53,13 +53,13 @@ class Widget extends Component
                 $channelMembers[$member->channel_id][] = $member;
             }
 
-            if (!Cache::has('discord-widget-user-'.$member->id)) {
+            if (!Cache::has('discord-widget-user-' . $member->id)) {
                 $avatar = Http::get($member->avatar_url);
-                Cache::put('discord-widget-user-'.$member->id, base64_encode($avatar->body()), now()->addMinutes(5));
+                Cache::put('discord-widget-user-' . $member->id, base64_encode($avatar->body()), now()->addMinutes(5));
             }
-            $response->members[$i]->avatar_url = 'data:image/png;base64,'.Cache::get(
-                    'discord-widget-user-'.$member->id
-                );
+            $response->members[$i]->avatar_url = 'data:image/png;base64,' . Cache::get(
+                'discord-widget-user-' . $member->id
+            );
         }
 
         if (!empty($response->channels)) {
