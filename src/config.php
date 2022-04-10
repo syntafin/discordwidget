@@ -3,6 +3,8 @@
 return [
     'avatar' => env('DISCORD_AVATAR', true),
 
+    'server' => env('DISCORD_SERVER', null),
+
     /**
      * If set to true, the included CSS is used,
      * you can set to false if you use TailwindCSS in your project.
