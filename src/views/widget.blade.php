@@ -79,7 +79,7 @@
                         $text = config('discord-widget.colors.text', 'text-gray-900');
                         $textSub = config('discord-widget.colors.textSub', 'text-gray-500');
                     @endphp
-                    <div class="relative rounded-lg border {{ $border }} {{ $background }} px-6 py-5 shadow-sm flex items-center space-x-3 {{ $borderHover }}">
+                    <div class="relative rounded-lg border {{ $border }} {{ $background }} p-3 shadow-sm flex items-center space-x-3 {{ $borderHover }}">
                         @if(config('discord-widget.avatar'))
                         <div class="flex-shrink-0">
                             <img class="h-10 w-10 rounded-full" src="{{ $member->avatar_url }}" alt="">
