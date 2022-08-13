@@ -6,6 +6,19 @@ return [
     'server' => env('DISCORD_SERVER', null),
 
     /**
+     * Set the colors used for the widget
+     *
+     */
+    'colors' => [
+        'ringColor' => 'ring-white',
+        'background' => 'bg-white',
+        'border' => 'border-gray-300',
+        'borderHover' => 'hover:border-gray-400',
+        'text' => 'text-gray-900',
+        'textSub' => 'text-gray-500',
+    ],
+
+    /**
      * If set to true, the included CSS is used,
      * you can set to false if you use TailwindCSS in your project.
      *

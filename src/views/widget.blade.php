@@ -71,22 +71,27 @@
                             default:
                             $status = 'bg-gray-400';
                         }
+
+                        $ringColor = config('discord-widget.colors.ringColor', 'ring-white');
+                        $background = config('discord-widget.colors.background', 'bg-white');
+                        $border = config('discord-widget.colors.border', 'border-gray-300');
+                        $borderHover = config('discord-widget.colors.borderHover', 'hover:border-gray-400');
+                        $text = config('discord-widget.colors.text', 'text-gray-900');
+                        $textSub = config('discord-widget.colors.textSub', 'text-gray-500');
                     @endphp
-                    <div class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                    <div class="relative rounded-lg border {{ $border }} {{ $background }} px-6 py-5 shadow-sm flex items-center space-x-3 {{ $borderHover }}">
                         @if(config('discord-widget.avatar'))
                         <div class="flex-shrink-0">
                             <img class="h-10 w-10 rounded-full" src="{{ $member->avatar_url }}" alt="">
-                            <span class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white {{ $status }}"></span>
+                            <span class="relative bottom-2 left-7 block h-2.5 w-2.5 rounded-full ring-2 {{ $ringColor }} {{ $status }}"></span>
                         </div>
                         @endif
                         <div class="flex-1 min-w-0">
-                            <a href="#" class="focus:outline-none">
-                                <span class="absolute inset-0" aria-hidden="true"></span>
-                                <p class="text-sm font-medium text-gray-900">{{ $member->username }}</p>
-                                @isset($member->game)
-                                <p class="text-sm text-gray-500 truncate">{{ $member->game->name }}</p>
-                                @endisset
-                            </a>
+                            <span class="absolute inset-0" aria-hidden="true"></span>
+                            <p class="text-sm font-medium {{ $text }}">{{ $member->username }}</p>
+                            @isset($member->game)
+                            <p class="text-sm {{ $textSub }} truncate">{{ $member->game->name }}</p>
+                            @endisset
                         </div>
                     </div>
                 @endforeach
