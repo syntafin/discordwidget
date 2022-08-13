@@ -55,7 +55,7 @@
             </span>
         </p>
         <div class="h-80 overflow-y-auto" data-simplebar>
-            <ul class="divide-y divide-gray-200">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 @foreach($data->member_list as $member)
                     @php
                         switch ($member->status) {
@@ -72,22 +72,25 @@
                             $status = 'bg-gray-400';
                         }
                     @endphp
-                    <li class="py-4 flex">
+                    <div class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                         @if(config('discord-widget.avatar'))
-                        <span class="inline-block relative">
+                        <div class="flex-shrink-0">
                             <img class="h-10 w-10 rounded-full" src="{{ $member->avatar_url }}" alt="">
                             <span class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white {{ $status }}"></span>
-                        </span>
-                        @endif
-                        <div class="ml-3">
-                            <p class="text-sm font-medium text-gray-900 dark:text-gray-100">{{ $member->username }}</p>
-                            @isset($member->game)
-                            <p class="text-sm text-gray-500 dark:text-gray-300">{{ $member->game->name }}</p>
-                            @endisset
                         </div>
-                    </li>
+                        @endif
+                        <div class="flex-1 min-w-0">
+                            <a href="#" class="focus:outline-none">
+                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                <p class="text-sm font-medium text-gray-900">{{ $member->username }}</p>
+                                @isset($member->game)
+                                <p class="text-sm text-gray-500 truncate">{{ $member->game->name }}</p>
+                                @endisset
+                            </a>
+                        </div>
+                    </div>
                 @endforeach
-            </ul>
+            </div>
         </div>
     </div>
     <a href="{{ $data->instant_invite }}" class="inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mx-auto">

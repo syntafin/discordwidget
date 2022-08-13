@@ -16,7 +16,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.0.0",
         "laravel/framework": "^8.0|^9.0"
     },
     "extra": {
@@ -25,5 +25,8 @@
                 "Syntafin\\DiscordWidget\\DiscordWidgetServiceProvider"
             ]
         }
+    },
+    "require-dev": {
+        "laravel/pint": "^1.1"
     }
 }
