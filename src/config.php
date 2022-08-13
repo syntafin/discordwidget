@@ -16,6 +16,8 @@ return [
         'borderHover' => 'hover:border-gray-400',
         'text' => 'text-gray-900',
         'textSub' => 'text-gray-500',
+        'button' => 'bg-indigo-600',
+        'buttonHover' => 'hover:bg-indigo-700',
     ],
 
     /**

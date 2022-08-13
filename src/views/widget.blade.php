@@ -72,12 +72,14 @@
                             $status = 'bg-gray-400';
                         }
 
-                        $ringColor = config('discord-widget.colors.ringColor', 'ring-white');
-                        $background = config('discord-widget.colors.background', 'bg-white');
-                        $border = config('discord-widget.colors.border', 'border-gray-300');
-                        $borderHover = config('discord-widget.colors.borderHover', 'hover:border-gray-400');
-                        $text = config('discord-widget.colors.text', 'text-gray-900');
-                        $textSub = config('discord-widget.colors.textSub', 'text-gray-500');
+                        $ringColor = config('discord-widget.colors.ringColor');
+                        $background = config('discord-widget.colors.background');
+                        $border = config('discord-widget.colors.border');
+                        $borderHover = config('discord-widget.colors.borderHover');
+                        $text = config('discord-widget.colors.text');
+                        $textSub = config('discord-widget.colors.textSub');
+                        $button = config('discord-widget.colors.button');
+                        $buttonHover = config('discord-widget.colors.buttonHover');
                     @endphp
                     <div class="relative rounded-lg border {{ $border }} {{ $background }} p-3 shadow-sm flex items-center space-x-3 {{ $borderHover }}">
                         @if(config('discord-widget.avatar'))
@@ -98,7 +100,7 @@
             </div>
         </div>
     </div>
-    <a href="{{ $data->instant_invite }}" class="inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mx-auto">
+    <a href="{{ $data->instant_invite }}" class="inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded w-full shadow-sm text-white {{ $button }} {{ $buttonHover }} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mx-auto">
         @lang('discord-widget::widget.invite')
     </a>
     @endisset
