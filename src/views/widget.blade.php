@@ -55,7 +55,7 @@
             </span>
         </p>
         <div class="h-80 overflow-y-auto" data-simplebar>
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div class="space-y-1">
                 @foreach($data->member_list as $member)
                     @php
                         switch ($member->status) {
