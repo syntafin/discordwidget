@@ -22,6 +22,7 @@ class DiscordWidgetServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/config.php' => config_path('discord-widget.php'),
+            __DIR__ . '/images' => public_path('vendor/synDiscordWidget'),
         ]);
 
         $this->loadViewsFrom(__DIR__ . '/views', 'discord-widget');
