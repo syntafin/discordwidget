@@ -1,4 +1,4 @@
-<div style="background: url('{{ asset('vendor/synDiscordWidget/discordWidgetBoxBackground_1.png') }}')">
+<div style="background: url('{{ asset('vendor/synDiscordWidget/discordWidgetBoxBackground_1.png') }}') bottom left no-repeat">
     @isset($data->error)
     <div class="alert alert-danger">
         @lang('discord-widget::widget.error', ['error' => $data->error, 'code' => $data->code])
